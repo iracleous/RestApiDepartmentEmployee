@@ -1,6 +1,8 @@
 package gr.codehub;
 
 import gr.codehub.model.Department;
+import gr.codehub.model.Dto;
+import gr.codehub.model.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -9,6 +11,13 @@ import java.util.List;
 public class MainApplication {
 
     public static void main(String[] args) {
+        test2();
+
+    }
+
+
+
+    public static void test4(){
         RestTemplate restTemplate = new RestTemplate();
         String urlForDepartment= "http://localhost:4000/department";
 
@@ -25,18 +34,18 @@ public class MainApplication {
                 = restTemplate.getForEntity(urlForDepartment+"/1", Department.class);
 
         System.out.println(employeeList.getBody().toString());
-
     }
-
     public static void test2() {
 
         RestTemplate restTemplate = new RestTemplate();
         String urlGoogle= "https://gorest.co.in/public/v1/users";
 
-        ResponseEntity<Object> response
-                = restTemplate.getForEntity(urlGoogle, Object.class);
+        ResponseEntity<Dto> response
+                = restTemplate.getForEntity(urlGoogle, Dto.class);
 
-        System.out.println(response.getBody());
+        List<User> users = response.getBody().getData();
+
+        System.out.println(users);
 
 
     }
